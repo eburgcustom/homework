@@ -13,3 +13,14 @@ def filter_by_currency(transactions: List[Dict[str, Any]], currency_code: str) -
     for transaction in transactions:
         if transaction.get("operationAmount", {}).get("currency", {}).get("code") == currency_code:
             yield transaction
+
+
+def transaction_descriptions(transactions: List[Dict[str, Any]]) -> Iterator[str]:
+    """
+    Генератор, который поочерёдно возвращает описание каждой операции.
+
+    :param transactions: список словарей с данными транзакций
+    :return: итератор по строкам-описаниям
+    """
+    for transaction in transactions:
+        yield transaction.get("description", "")
