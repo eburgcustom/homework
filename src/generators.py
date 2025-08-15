@@ -24,3 +24,16 @@ def transaction_descriptions(transactions: List[Dict[str, Any]]) -> Iterator[str
     """
     for transaction in transactions:
         yield transaction.get("description", "")
+
+
+def card_number_generator(start: int, stop: int) -> Iterator[str]:
+    """
+    Генератор, который выдает номера банковских карт в вормате ХХХХ ХХХХ ХХХХ ХХХХ.
+
+    :param start: начальное число
+    :param stop: конечное число (включительно)
+    :return: итератор по номерам карт
+    """
+    for number in range(start, stop+1):
+        yield (f"{number:016d}"[:4] + " " + f"{number:016d}"[4:8] + " " + f"{number:016d}"[8:12] + " " +
+               f"{number:016d}"[12:])
