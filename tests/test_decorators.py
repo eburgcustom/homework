@@ -1,4 +1,5 @@
 import pytest
+
 from src.decorators import log
 
 
@@ -9,6 +10,7 @@ def test_log_success_console(capsys):
     - вывод функции в консоль сообщения 'имя функции ок'
     - корректное возвращаемое значение
     """
+
     @log()
     def add(x: int, y: int) -> int:
         return x + y
@@ -27,8 +29,9 @@ def test_log_error_console(capsys):
     - вывод сообщения в консоль об ошибке с типом исключения
     - наличие входных аргументов в сообщении
     """
+
     @log()
-    def div(x:int, y: int) -> float:
+    def div(x: int, y: int) -> float:
         return x / y
 
     with pytest.raises(ZeroDivisionError):
@@ -64,9 +67,10 @@ def test_log_error_file(tmp_path):
     - наличие входных аргументов в лог файл
     """
     log_file = tmp_path / "log.txt"
+
     @log(filename=log_file)
     def sub(x: int, y: int) -> int:
-        return x - y if y != 0 else 1 / 0 # вызов ZeroDivisionError
+        return x - y if y != 0 else 1 / 0  # вызов ZeroDivisionError
 
     with pytest.raises(ZeroDivisionError):
         sub(10, 0)

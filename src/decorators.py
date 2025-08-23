@@ -1,6 +1,6 @@
-from functools import wraps
 import sys
 from datetime import datetime
+from functools import wraps
 from typing import Any, Callable, Optional
 
 
@@ -21,10 +21,7 @@ def log(filename: Optional[str] = None) -> Callable:
                 _write_log(message, filename)
                 return result
             except Exception as e:
-                message = (
-                    f"{func.__name__} error: {type(e).__name__}. "
-                    f"Inputs: {args}, {kwargs}"
-                )
+                message = f"{func.__name__} error: {type(e).__name__}. " f"Inputs: {args}, {kwargs}"
                 _write_log(message, filename)
                 raise
 

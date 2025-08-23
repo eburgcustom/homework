@@ -15,10 +15,15 @@ def test_filter_by_state_default(operations_data: list[dict[str, Any]]) -> None:
     assert len(result) == 2
 
 
-@pytest.mark.parametrize("state,expected_count", [("EXECUTED", 2),
-                                                  ("CANCELED", 1),
-                                                  ("PENDING", 1),
-                                                  ("MISSING", 0),])
+@pytest.mark.parametrize(
+    "state,expected_count",
+    [
+        ("EXECUTED", 2),
+        ("CANCELED", 1),
+        ("PENDING", 1),
+        ("MISSING", 0),
+    ],
+)
 def test_filter_by_state_param(operations_data: list[dict[str, Any]], state: str, expected_count: int) -> None:
     """
     Проверяет, что filter_by_state корректно фильтрует

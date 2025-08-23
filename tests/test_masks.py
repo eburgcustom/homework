@@ -5,8 +5,13 @@ import pytest
 from src.masks import get_mask_account, get_mask_card_number
 
 
-@pytest.mark.parametrize("card,expected", [("1234567812345678", "1234 56** **** 5678"),
-                                           (1234567812345678, "1234 56** **** 5678"),])
+@pytest.mark.parametrize(
+    "card,expected",
+    [
+        ("1234567812345678", "1234 56** **** 5678"),
+        (1234567812345678, "1234 56** **** 5678"),
+    ],
+)
 def test_get_mask_card_number_valid(card: Union[str, int], expected: str) -> None:
     """
     Проверяет корректную работу get_mask_card_number
@@ -25,8 +30,13 @@ def test_get_mask_card_number_invalid(card: Union[str, int]) -> None:
         get_mask_card_number(card)
 
 
-@pytest.mark.parametrize("account,expected", [("12345678", "**5678"),
-                                              (12345678, "**5678"),])
+@pytest.mark.parametrize(
+    "account,expected",
+    [
+        ("12345678", "**5678"),
+        (12345678, "**5678"),
+    ],
+)
 def test_get_mask_account_valid(account: Union[str, int], expected: str) -> None:
     """
     Проверяет корректную работу get_mask_account
