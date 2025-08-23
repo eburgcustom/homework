@@ -31,7 +31,7 @@ pytest
 Возвращает итератор по транзакциям с заданным кодом валюты.
 
 Пример:
-```python
+```
 usd_transactions = filter_by_currency(transactions, "USD")
 for _ in range(2):
     print(next(usd_transactions))
@@ -71,7 +71,7 @@ for _ in range(2):
 Возвращает описания транзакций по очереди.
 
 Пример:
-```python
+```
 descriptions = transaction_descriptions(transactions)
 for _ in range(5):
     print(next(descriptions))
@@ -86,7 +86,7 @@ for _ in range(5):
 Генерирует номера банковских карт в формате XXXX XXXX XXXX XXXX.
 
 Пример:
-```python
+```
 for card_number in card_number_generator(1, 5):
     print(card_number)
 
@@ -95,4 +95,29 @@ for card_number in card_number_generator(1, 5):
     0000 0000 0000 0003
     0000 0000 0000 0004
     0000 0000 0000 0005
+```
+## Декоратор log
+
+Модуль `decorators` содержит декоратор `@log`, который автоматически логирует выполнение функций.
+
+### Пример использования:
+
+```
+from src.decorators import log
+
+@log(filename="mylog.txt")
+def my_function(x, y):
+    return x + y
+
+my_function(1, 2)
+```
+### Пример вывода:
+
+В файл mylog.txt:
+```
+[2025-08-23 23:12:00] my_function ok
+```
+В случае ошибки:
+```
+[2025-08-23 23:12:05] my_function error: ZeroDivisionError. Inputs: (1, 0), {}
 ```
