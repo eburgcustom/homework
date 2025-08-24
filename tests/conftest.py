@@ -13,7 +13,9 @@ def account_number():
 
 @pytest.fixture
 def operations_data():
-    return [{"state": "EXECUTED", "date": "2023-07-15"},
-            {"state": "CANCELED", "date": "2023-07-16"},
-            {"state": "EXECUTED", "date": "2023-07-14"},
-            {"state": "PENDING", "date": "2023-07-15"},]
+    return [
+        {"state": "EXECUTED", "date": "2023-07-15"},
+        {"state": "CANCELED", "date": "2023-07-16"},
+        {"state": "EXECUTED", "date": "2023-07-14"},
+        {"state": "PENDING", "date": "2023-07-15"},
+    ]
