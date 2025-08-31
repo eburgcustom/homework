@@ -1,5 +1,5 @@
-import pytest
 from unittest.mock import patch
+
 from src.external_api import get_amount_in_rub
 
 

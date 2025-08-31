@@ -1,6 +1,5 @@
-import pytest
 import json
-import os
+
 from src.utils import load_transactions
 
 

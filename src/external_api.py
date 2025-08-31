@@ -1,6 +1,7 @@
 import os
-import requests
 from typing import Dict
+
+import requests
 
 
 def get_amount_in_rub(transaction: Dict) -> float:
@@ -29,4 +30,4 @@ def get_amount_in_rub(transaction: Dict) -> float:
     response.raise_for_status()
 
     rate = response.json()["rates"]["RUB"]
-    return amount * rate
+    return float(amount * rate)
