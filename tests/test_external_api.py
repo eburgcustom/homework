@@ -11,7 +11,7 @@ def test_convert_to_rub_usd(mock_get):
     """
     transaction = {"operationAmount": {"amount": "100", "currency": {"code": "USD"}}}
 
-    mock_get.return_value.json.return_value = {"rates": {"RUB": 75}}
+    mock_get.return_value.json.return_value = {"result": 7500.0}
     mock_get.return_value.status_code = 200
 
     result = get_amount_in_rub(transaction)
@@ -27,7 +27,7 @@ def test_convert_to_rub_eur(mock_get):
     """
     transaction = {"operationAmount": {"amount": "50", "currency": {"code": "EUR"}}}
 
-    mock_get.return_value.json.return_value = {"rates": {"RUB": 90}}
+    mock_get.return_value.json.return_value = {"result": 4500.0}
     mock_get.return_value.status_code = 200
 
     result = get_amount_in_rub(transaction)

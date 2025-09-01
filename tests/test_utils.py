@@ -48,3 +48,15 @@ def test_load_transactions_file_not_found():
     """
     result = load_transactions("non_existent.json")
     assert result == []
+
+
+def test_load_transactions_invalid_json(tmp_path):
+    """
+    Тестирует поведение при некорректном JSON (битый файл).
+    Ожидается возврат пустого списка.
+    """
+    file_path = tmp_path / "broken.json"
+    file_path.write_text("{invalid json}", encoding="utf-8")
+
+    result = load_transactions(str(file_path))
+    assert result == []
