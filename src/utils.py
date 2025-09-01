@@ -21,8 +21,8 @@ def load_transactions(file_path: str) -> List[Dict[str, Any]]:
         with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
 
-        if not isinstance(data, list):
-            return []
-        return data
-    except (json.JSONDecodeError, OSError):
+        if isinstance(data, list):
+            return data
+        return []
+    except (json.JSONDecodeError, OSError, FileNotFoundError):
         return []
