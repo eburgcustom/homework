@@ -3,7 +3,6 @@ import logging
 import os
 from typing import Any, Dict, List
 
-
 os.makedirs("logs", exist_ok=True)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
