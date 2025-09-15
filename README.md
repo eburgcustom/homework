@@ -121,3 +121,24 @@ my_function(1, 2)
 ```
 [2025-08-23 23:12:05] my_function error: ZeroDivisionError. Inputs: (1, 0), {}
 ```
+## Новая функциональность
+
+### Поддержка CSV и Excel файлов
+
+Теперь проект поддерживает чтение финансовых транзакций из:
+- CSV файлов (`*.csv`)
+- Excel файлов (`*.xlsx`, `*.xls`)
+
+#### Использование:
+
+```
+from src.readers import load_transactions_from_csv, load_transactions_from_excel
+
+# Чтение из CSV
+transactions = load_transactions_from_csv("data/transactions.csv")
+
+# Чтение из Excel
+transactions = load_transactions_from_excel("data/transactions_excel.xlsx")
+```
+### Обработка ошибок:
+Функции выбрасывают исключения FileNotFoundError и ValueError для обработки ошибок.
