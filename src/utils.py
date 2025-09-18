@@ -2,6 +2,7 @@ import json
 import logging
 import os
 from typing import Any, Dict, List
+
 from src.processors import normalize_transaction
 
 os.makedirs("logs", exist_ok=True)

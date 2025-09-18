@@ -1,5 +1,6 @@
 import pytest
-from src.processors import process_bank_search, process_bank_operations, normalize_transaction
+
+from src.processors import normalize_transaction, process_bank_operations, process_bank_search
 
 
 @pytest.fixture

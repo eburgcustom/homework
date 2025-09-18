@@ -1,8 +1,9 @@
 import os
 from typing import Any, Dict, Hashable, List
-from src.processors import normalize_transaction
 
 import pandas as pd
+
+from src.processors import normalize_transaction
 
 
 def load_transactions_from_csv(file_path: str) -> list[dict[Hashable, Any]]:

@@ -1,7 +1,9 @@
+from typing import Any, Dict, List
+
+from src.processors import process_bank_search
 from src.readers import load_transactions_from_csv, load_transactions_from_excel
 from src.utils import load_transactions
-from src.processors import process_bank_search
-from src.widget import mask_account_card, get_date
+from src.widget import get_date, mask_account_card
 
 
 def main() -> None:
