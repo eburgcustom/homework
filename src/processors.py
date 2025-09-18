@@ -29,7 +29,7 @@ def process_bank_operations(data: List[dict], categories: List[str]) -> Dict[str
     Returns:
         Dict[str, int]: Словарь с категориями и количеством операций.
     """
-    counter = Counter()
+    counter = Counter({category: 0 for category in categories})
     for operation in data:
         description = operation.get("description", "").lower()
         for category in categories:
