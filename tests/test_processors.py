@@ -1,5 +1,5 @@
 import pytest
-from src.processors import process_bank_search, process_bank_operations
+from src.processors import process_bank_search, process_bank_operations, normalize_transaction
 
 
 @pytest.fixture
@@ -94,3 +94,28 @@ def test_process_bank_operations_empty_data():
 
     assert result["Перевод организации"] == 0
     assert result["Открытие вклада"] == 0
+
+
+def test_normalize_transaction_extracts_amount_and_currency():
+    """Проверка извлечения суммы и валюты из operationAmount"""
+    tx = {
+        "id": 1,
+        "operationAmount": {
+            "amount": "1000",
+            "currency": {"name": "RUB", "code": "RUB"},
+        }
+    }
+    normalized = normalize_transaction(tx)
+    assert normalized["amount"] == "1000"
+    assert normalized["currency_name"] == "RUB"
+    assert normalized["currency_code"] == "RUB"
+
+
+def test_normalize_transaction_without_operation_amount():
+    """Проверяет корректность работы, если operationAmount отсутствует"""
+    tx = {"id": 2, "description": "Операция без суммы"}
+    normalized = normalize_transaction(tx)
+    # ничего не должно сломаться
+    assert "amount" not in normalized
+    assert "currency_name" not in normalized
+    assert "currency_code" not in normalized

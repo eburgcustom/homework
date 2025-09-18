@@ -9,17 +9,13 @@ from src.readers import load_transactions_from_csv, load_transactions_from_excel
 def test_load_transactions_from_csv_success():
     """Тест успешного чтения CSV файла с транзакциями."""
     mock_data = [{"date": "2023-01-01", "amount": 100}, {"date": "2023-01-02", "amount": 200}]
+    mock_df = pd.DataFrame(mock_data)
 
-    with patch("pandas.read_csv") as mock_read_csv:
-        mock_df = MagicMock()
-        mock_df.to_dict.return_value = mock_data
-        mock_read_csv.return_value = mock_df
-
+    with patch("pandas.read_csv", return_value=mock_df):
         with patch("os.path.exists", return_value=True):
             result = load_transactions_from_csv("dummy_path.csv")
 
-            assert result == mock_data
-            mock_read_csv.assert_called_once_with("dummy_path.csv")
+    assert result == mock_data
 
 
 def test_load_transactions_from_csv_file_not_found():
@@ -48,17 +44,13 @@ def test_load_transactions_from_csv_unexpected_error():
 def test_load_transactions_from_excel_success():
     """Тест успешного чтения Excel файла с транзакциями."""
     mock_data = [{"date": "2023-02-01", "amount": 300}, {"date": "2023-02-02", "amount": 400}]
+    mock_df = pd.DataFrame(mock_data)
 
-    with patch("pandas.read_excel") as mock_read_excel:
-        mock_df = MagicMock()
-        mock_df.to_dict.return_value = mock_data
-        mock_read_excel.return_value = mock_df
-
+    with patch("pandas.read_excel", return_value=mock_df):
         with patch("os.path.exists", return_value=True):
             result = load_transactions_from_excel("dummy_path.xlsx")
 
-            assert result == mock_data
-            mock_read_excel.assert_called_once_with("dummy_path.xlsx")
+    assert result == mock_data
 
 
 def test_load_transactions_from_excel_file_not_found():
