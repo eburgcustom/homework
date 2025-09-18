@@ -1,6 +1,6 @@
 import re
 from collections import Counter
-from typing import List, Dict
+from typing import List, Dict, Any
 
 
 def process_bank_search(data: List[dict], search: str) -> List[dict]:
@@ -36,3 +36,17 @@ def process_bank_operations(data: List[dict], categories: List[str]) -> Dict[str
             if category.lower() in description:
                 counter[category] += 1
     return dict(counter)
+
+
+def normalize_transaction(transaction: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Приводит транзакцию к единому формату, извлекая сумму
+    и валюту из вложенной структуры 'operationAmount', если она есть.
+    """
+    if "operationAmount" in transaction and isinstance(transaction.get("operationAmount"), dict):
+        op_amount = transaction["operationAmount"]
+        transaction["amount"] = op_amount.get("amount")
+        currency_info = op_amount.get("currency", {})
+        transaction["currency_name"] = currency_info.get("name")
+        transaction["currency_code"] = currency_info.get("code")
+    return transaction
