@@ -3,6 +3,8 @@ import logging
 import os
 from typing import Any, Dict, List
 
+from src.processors import normalize_transaction
+
 os.makedirs("logs", exist_ok=True)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -37,7 +39,7 @@ def load_transactions(file_path: str) -> List[Dict[str, Any]]:
 
         if isinstance(data, list):
             logger.info("Файл %s успешно загружен, найдено %d транзакций", file_path, len(data))
-            return data
+            return [normalize_transaction(tx) for tx in data]
 
         logger.error("Файл %s содержит некорректный формат (ожидался список)", file_path)
         return []

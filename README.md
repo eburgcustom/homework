@@ -1,27 +1,80 @@
-# Проект обработки данных операций
+# 🏦 Обработка банковских операций
 
-## Цель проекта
-Проект предназначен для фильтрации и сортировки банковских операций по дате и состоянию.
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
+[![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Установка
+## 📋 О проекте
+Проект предназначен для фильтрации, сортировки и анализа банковских операций. Поддерживает работу с JSON, CSV и Excel файлами.
+
+## 🚀 Быстрый старт
+
+```python
+from src.readers import load_transactions_from_csv
+from src.processors import process_bank_search
+
+# Загрузка транзакций
+transactions = load_transactions_from_csv("data/transactions.csv")
+
+# Поиск по описанию
+filtered = process_bank_search(transactions, "перевод")
+```
+
+## ⚙️ Зависимости
+
+- Python 3.8+
+- pandas (для работы с Excel)
+- pytest (для запуска тестов)
+- python-dotenv (для работы с переменными окружения)
+
+## 🛠 Установка
+
 1. Клонируйте репозиторий:
 ```bash
 git clone https://github.com/eburgcustom/homework.git
+cd homework
 ```
-2. Перейдите в папку проекта:
-cd ИМЯ_РЕПОЗИТОРИЯ
-3. Установите зависимости (через Poetry):
+
+2. Установите зависимости:
+```bash
+# С использованием Poetry (рекомендуется)
 poetry install
-4. Активируйте виртуальное окружение:
 poetry shell
 
-## Тестирование
+# Или с использованием pip
+pip install -r requirements.txt
+```
 
-В проекте используется библиотека `pytest` для автоматизированного тестирования.
+3. Создайте файл `.env` в корне проекта (см. раздел Настройка окружения)
+
+## 🧪 Тестирование
+
+Проект использует `pytest` для автоматизированного тестирования.
 
 ### Запуск тестов
 ```bash
+# Все тесты
 pytest
+
+# С подробным выводом
+pytest -v
+
+# Только определенный тестовый файл
+pytest tests/test_utils.py
+```
+
+## ⚙️ Настройка окружения
+
+Создайте файл `.env` в корне проекта:
+```
+# Уровень логирования (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+LOG_LEVEL=INFO
+
+# Путь к файлу с логами
+LOG_FILE=logs/app.log
+
+# Настройки API (если используются)
+API_KEY=your_api_key_here
 ```
 ## Модуль generators
 
@@ -121,24 +174,23 @@ my_function(1, 2)
 ```
 [2025-08-23 23:12:05] my_function error: ZeroDivisionError. Inputs: (1, 0), {}
 ```
-## Новая функциональность
+## 📚 Документация
 
-### Поддержка CSV и Excel файлов
-
-Теперь проект поддерживает чтение финансовых транзакций из:
+### Поддержка форматов
+Проект поддерживает чтение транзакций из:
+- JSON файлов (`*.json`)
 - CSV файлов (`*.csv`)
 - Excel файлов (`*.xlsx`, `*.xls`)
 
-#### Использование:
-
+### Пример вывода
 ```
-from src.readers import load_transactions_from_csv, load_transactions_from_excel
-
-# Чтение из CSV
-transactions = load_transactions_from_csv("data/transactions.csv")
-
-# Чтение из Excel
-transactions = load_transactions_from_excel("data/transactions_excel.xlsx")
+2023-09-18 14:30:00 Перевод организации  
+Visa Platinum 7000 79** **** 6361 -> Счет **9589  
+Сумма: 1000 RUB
 ```
-### Обработка ошибок:
-Функции выбрасывают исключения FileNotFoundError и ValueError для обработки ошибок.
+
+### Обработка ошибок
+Функции выбрасывают следующие исключения:
+- `FileNotFoundError` - если файл не найден
+- `ValueError` - если формат данных неверный
+- `KeyError` - если отсутствуют обязательные поля
